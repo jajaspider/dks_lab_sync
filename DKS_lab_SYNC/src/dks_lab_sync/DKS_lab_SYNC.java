@@ -15,6 +15,7 @@ public class DKS_lab_SYNC {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        "SEOHOYUNG"
         // TODO code application logic here
     }
     
