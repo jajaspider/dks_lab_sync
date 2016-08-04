@@ -15,7 +15,13 @@ public class DKS_lab_SYNC {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        "SEOHOYUNG"dsasasdsasdsa
+        System.out.println("Hello world!!!!!!!!!!!!!!!!");
+        System.out.println("Hello world!!!!!!!!!!!!!!!!");
+        System.out.println("Hello world!!!!!!!!!!!!!!!!");
+        System.out.println("Hello world!!!!!!!!!!!!!!!!");
+        System.out.println("Hello world!!!!!!!!!!!!!!!!");
+        System.out.println("Hello world!!!!!!!!!!!!!!!!");
+        
         // TODO code application logic here
     }
     
