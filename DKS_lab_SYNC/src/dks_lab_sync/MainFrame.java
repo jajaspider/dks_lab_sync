@@ -5,17 +5,12 @@
  */
 package dks_lab_sync;
 
-import java.awt.Component;
 import javax.swing.JFileChooser;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.*;
 
 /*
 디렉토리 선택 방법
@@ -67,7 +62,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         }
     };
-    
+    public void addTabelModelListener(TableModelListener i){
+        System.out.println(i);
+    }
     /**
      * Creates new form MainFrame
      */
