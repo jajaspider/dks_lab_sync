@@ -5,10 +5,16 @@
  */
 package dks_lab_sync;
 
+import java.awt.Component;
 import javax.swing.JFileChooser;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -35,18 +41,52 @@ Swing의 JFileChooser라는 객체가 존재하므로 이것으로 찾아오는 
 public class MainFrame extends javax.swing.JFrame {
 
     File[] dir1, dir2;
-    String[] columns = {" ", "구분", "이름", "마지막 수정일"};
     Object[][] obj1 = new Object[0][4];
     Object[][] obj2 = new Object[0][4];
     
-    DefaultTableModel tm1 = new DefaultTableModel(obj1, columns);
-    DefaultTableModel tm2 = new DefaultTableModel(obj2, columns);
+    DefaultTableModel tm1 = new DefaultTableModel() {
+        @Override
+        public Class<?> getColumnClass(int columnIndex) {
+            switch(columnIndex) {
+                case 0: return Boolean.class;
+                case 1: return String.class;
+                case 2: return String.class;
+                case 3: return String.class;
+                default: return String.class;
+            }
+        }
+    };
+    DefaultTableModel tm2 = new DefaultTableModel() {
+        @Override
+        public Class<?> getColumnClass(int columnIndex) {
+            switch(columnIndex) {
+                case 0: return String.class;
+                case 1: return String.class;
+                case 2: return String.class;
+                default: return String.class;
+            }
+        }
+    };
     
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        init();
+    }
+    
+    public void init() {
+        dirTable1.setModel(tm1);
+        tm1.addColumn(" ");
+        tm1.addColumn("구분");
+        tm1.addColumn("이름");
+        tm1.addColumn("마지막 수정일");
+        
+        dirTable2.setModel(tm2);
+        tm2.addColumn("구분");
+        tm2.addColumn("이름");
+        tm2.addColumn("마지막 수정일");
     }
     
     public File fileChoose() {
@@ -66,7 +106,7 @@ public class MainFrame extends javax.swing.JFrame {
         return fileList;
     }
     
-    public Object[][] filesList(ArrayList<FileData> file, ArrayList<FileData> dir) {
+    public Object[][] dir1FilesList(ArrayList<FileData> file, ArrayList<FileData> dir) {
         int size = file.size() + dir.size();
         Object[][] obj = new Object[size][4];
         
@@ -82,6 +122,25 @@ public class MainFrame extends javax.swing.JFrame {
             obj[i][1] = file.get(j).getType();
             obj[i][2] = file.get(j).getName();
             obj[i][3] = file.get(j).getDate();
+        }
+        
+        return obj;
+    }
+    
+    public Object[][] dir2FilesList(ArrayList<FileData> file, ArrayList<FileData> dir) {
+        int size = file.size() + dir.size();
+        Object[][] obj = new Object[size][3];
+        
+        for(int i=0;i<dir.size();i++) {
+            obj[i][0] = dir.get(i).getType();
+            obj[i][1] = dir.get(i).getName();
+            obj[i][2] = dir.get(i).getDate();
+        }
+        
+        for(int i=dir.size(), j=0;i<dir.size()+file.size();i++,j++) {
+            obj[i][0] = file.get(j).getType();
+            obj[i][1] = file.get(j).getName();
+            obj[i][2] = file.get(j).getDate();
         }
         
         return obj;
@@ -108,14 +167,23 @@ public class MainFrame extends javax.swing.JFrame {
             e.printStackTrace();
         }
         
-        Object[][] list = filesList(fileArray, dirArray);
-        
         if(position == 1) {
-            tm1.setDataVector(list, columns);
-            dirTable1.setModel(tm1);
+            Object[][] list = dir1FilesList(fileArray, dirArray);        
+            for(int i=0;i<list.length;i++) {
+                tm1.addRow(new Object[0]);
+                tm1.setValueAt(list[i][0], i, 0);
+                tm1.setValueAt(list[i][1], i, 1);
+                tm1.setValueAt(list[i][2], i, 2);
+                tm1.setValueAt(list[i][3], i, 3);
+            }
         }else if(position == 2) {
-            tm2.setDataVector(list, columns);
-            dirTable2.setModel(tm2);
+            Object[][] list = dir2FilesList(fileArray, dirArray);        
+            for(int i=0;i<list.length;i++) {
+                tm2.addRow(new Object[0]);
+                tm2.setValueAt(list[i][0], i, 0);
+                tm2.setValueAt(list[i][1], i, 1);
+                tm2.setValueAt(list[i][2], i, 2);
+            }
         }
     }
     
