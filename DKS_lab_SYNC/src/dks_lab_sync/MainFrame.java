@@ -5,12 +5,29 @@
  */
 package dks_lab_sync;
 
+<<<<<<< HEAD
+=======
+import java.awt.Component;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+>>>>>>> d2adde31c6204c6549f98f07d3382ef01b891fac
 import javax.swing.JFileChooser;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+<<<<<<< HEAD
 import javax.swing.event.TableModelListener;
 import javax.swing.table.*;
+=======
+import javax.swing.DefaultCellEditor;
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.event.EventListenerList;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+>>>>>>> d2adde31c6204c6549f98f07d3382ef01b891fac
 
 /*
 디렉토리 선택 방법
@@ -50,7 +67,20 @@ public class MainFrame extends javax.swing.JFrame {
                 default: return String.class;
             }
         }
-    };
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            if(column == 0) {
+                boolean value = (boolean)getValueAt(row, column);
+                if(!value) { // 체크되었을때
+                    
+                }else { // 체크해제될때
+                    
+                }
+            }
+            return true;
+        }
+   };
     DefaultTableModel tm2 = new DefaultTableModel() {
         @Override
         public Class<?> getColumnClass(int columnIndex) {
@@ -180,6 +210,7 @@ public class MainFrame extends javax.swing.JFrame {
                 tm2.setValueAt(list[i][0], i, 0);
                 tm2.setValueAt(list[i][1], i, 1);
                 tm2.setValueAt(list[i][2], i, 2);
+                tm2.getValueAt(i, 1);
             }
         }
     }
