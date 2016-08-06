@@ -5,29 +5,12 @@
  */
 package dks_lab_sync;
 
-<<<<<<< HEAD
-=======
-import java.awt.Component;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
->>>>>>> d2adde31c6204c6549f98f07d3382ef01b891fac
 import javax.swing.JFileChooser;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import javax.swing.event.TableModelListener;
-import javax.swing.table.*;
-=======
-import javax.swing.DefaultCellEditor;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.event.EventListenerList;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
->>>>>>> d2adde31c6204c6549f98f07d3382ef01b891fac
 
 /*
 디렉토리 선택 방법
@@ -49,12 +32,16 @@ Swing의 JFileChooser라는 객체가 존재하므로 이것으로 찾아오는 
  ==> 폴더 이동도 가능한듯 함
 
 재귀호출시 CanonicalPath 사용(한번 지정된 파일의 절대경로를 끝까지 가짐)
+
+
+클래스 생성 시 or setter 메소드 호출 시 폴더1, 폴더2 절대경로 넘겨줘야할 듯
+체크박스 선택 시 폴더2에 파일이 있는지 확인한 후 없을 경우에만 이동할 수 있도록 함
  */
 public class MainFrame extends javax.swing.JFrame {
 
     File[] dir1, dir2;
     Object[][] obj1 = new Object[0][4];
-    Object[][] obj2 = new Object[0][4];
+    Object[][] obj2 = new Object[0][3];
     
     DefaultTableModel tm1 = new DefaultTableModel() {
         @Override
@@ -73,9 +60,9 @@ public class MainFrame extends javax.swing.JFrame {
             if(column == 0) {
                 boolean value = (boolean)getValueAt(row, column);
                 if(!value) { // 체크되었을때
-                    
+                    //비교 실행 (파일이름, 경로)?
                 }else { // 체크해제될때
-                    
+                    //비교 취소
                 }
             }
             return true;
